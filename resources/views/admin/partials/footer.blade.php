@@ -11,7 +11,7 @@
                         <div class="align-items-center small">
                             <div class="text-muted copyright">
                                  Copyright &copy; 
-                                 2010-2024 Web Brain InfoTech All rights reserved.</div>
+                                 2010-2025 Web Brain InfoTech All rights reserved.</div>
                             <div>
                                 <!-- <a href="#">Privacy Policy</a>
                                 &middot;

@@ -449,7 +449,7 @@ public function showFullYearMarksheet($student_id)
         return redirect()->back()->with('error', 'Subjects not found for this student.');
     }
 
-    // Build a fast lookup: (subject_id | term) => collection of marks
+    // (subject_id | term) => collection of marks
     $marksBySubjectTerm = $marks->groupBy(function ($m) {
     $term = optional($m->exam)->term ?? '';
     return $m->subject_id . '|' . $term;
@@ -464,15 +464,14 @@ public function showFullYearMarksheet($student_id)
             return redirect()->back()->with('error', "Missing marks for subject '{$subject->name}' in '{$term}'.");
         }
     }
-}
+} 
 
     $grades = Grade::all();
 
     // All checks passed
     return view('admin.marks.full_year_marksheet', compact(
         'student', 'exams', 'marksBySubjectExam', 'subjects', 'grades', 'marks'
-    ));
+    )); 
 }
-
 
 }

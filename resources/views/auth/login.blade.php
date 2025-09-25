@@ -66,7 +66,6 @@
     </x-authentication-card>
 </x-guest-layout>
 
-
 <script>
     function togglePassword() {
         var passwordInput = document.getElementById("password");

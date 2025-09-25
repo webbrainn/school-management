@@ -101,10 +101,20 @@ class DashboardController extends Controller
         ->sortByDesc('date')
         ->take(5);
 
+    // Fee Collection Calculation
+    $totalCollected = Fee::sum('amount_paid'); 
+    $totalDue = Fee::sum('amount_due');
+
+    // If you want percentages instead of raw amounts
+    $total = $totalCollected + $totalDue;
+    $collectedPercent = $total > 0 ? round(($totalCollected / $total) * 100, 2) : 0;
+    $pendingPercent   = $total > 0 ? round(($totalDue / $total) * 100, 2) : 0;
+
     return view('admin.dashboard', compact(
         'totalStudents', 'totalTeachers', 'totalClasses', 'totalSections', 
         'totalSubjects', 'totalfees', 'totalGrades', 'totalExams', 
-        'totalMarks', 'totalAdmissions', 'recentActivities'
+        'totalMarks', 'totalAdmissions', 'recentActivities', 'totalCollected', 
+        'totalDue', 'collectedPercent', 'pendingPercent'
     ));
 }
 

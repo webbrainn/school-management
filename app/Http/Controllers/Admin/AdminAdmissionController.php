@@ -309,4 +309,5 @@ public function toggleStatus(Request $request)
             return back()->with('error', 'Failed to delete admission: ' . $e->getMessage());
         }
     }
-}
+} 
+

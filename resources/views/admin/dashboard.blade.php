@@ -175,7 +175,7 @@
 
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+<!-- <script>
     new Chart(document.getElementById('feeChart'), {
     type: 'bar',
     data: {
@@ -192,6 +192,53 @@
         scales: { x: { max: 100, ticks: { callback: v => v + '%' } } }
     }
 });
+</script> -->
+
+<script>
+    const ctx = document.getElementById('feeChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Collected', 'Pending'],
+            datasets: [{
+                data: [{{ $collectedPercent }}, {{ $pendingPercent }}],
+                backgroundColor: ['#4CAF50', '#F44336'],
+                borderRadius: 10
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            plugins: { 
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let value = context.raw;
+                            if (context.dataIndex === 0) {
+                                return '₹{{ $totalCollected }} (' + value + '%)';
+                            } else {
+                                return '₹{{ $totalDue }} (' + value + '%)';
+                            }
+                        }
+                    }
+                }
+            },
+            scales: { 
+                x: { max: 100, ticks: { callback: v => v + '%' } } 
+            },
+
+            // Add click event
+            onClick: function(evt, elements) {
+                if (elements.length > 0) {
+                    let clickedIndex = elements[0].index;
+                    if (clickedIndex === 0 || clickedIndex === 1) {
+                        window.location.href = "{{ url('admin/fees') }}";
+                    }
+                }
+            }
+        }
+    });
 </script>
 
 <!-- Mini Calendar (jQuery UI) -->

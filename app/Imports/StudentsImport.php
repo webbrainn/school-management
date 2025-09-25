@@ -47,9 +47,17 @@ class StudentsImport implements ToModel, WithHeadingRow, SkipsOnFailure
         }
 
         // Check if section capacity is full
-        if ($section->students_count >= $section->capacity) {
+        // if ($section->students_count >= $section->capacity) {
+        //     throw ValidationException::withMessages([
+        //         'section_name' => "Section '{$row['section_name']}' of class '{$row['class_name']}' is full."
+        //     ]);
+        // }
+
+        // Check if section capacity is full
+        $currentCount = Student::where('section_id', $section->id)->count();
+        if ($currentCount >= $section->capacity) {
             throw ValidationException::withMessages([
-                'section_name' => "Section '{$row['section_name']}' is full."
+                'section_name' => "Section '{$row['section_name']}' of class '{$row['class_name']}' is full."
             ]);
         }
 

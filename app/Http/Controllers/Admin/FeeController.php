@@ -16,6 +16,7 @@ class FeeController extends Controller
 public function index(Request $request)
 {
     $classes = SchoolClass::all();
+    $sections = Section::all();
     $students = collect();
     $selectedFees = collect();
 
@@ -28,7 +29,7 @@ public function index(Request $request)
         $selectedFees = Fee::where('student_id', $request->student_id)->get();
     }
 
-    return view('admin.fees.index', compact('classes', 'students', 'selectedFees'));
+    return view('admin.fees.index', compact('classes', 'students', 'selectedFees', 'sections'));
 }
 
 public function store(Request $request)

@@ -2147,10 +2147,16 @@ textarea.form-control-lg {
 .form-select{
   font-size: 0.80rem !important;
 }
+.form-control{
+  font-size: 0.80rem !important;
+}
 .btn{
   font-size: 0.75rem !important;
 }
 .table.dataTable thead > tr > th.sorting{
+  font-size: 0.90rem !important;
+}
+label{
   font-size: 0.90rem !important;
 }
 .btn-warning , .btn-danger{
